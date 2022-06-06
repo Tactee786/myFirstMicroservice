@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@RequestMapping("/")
+@RequestMapping("/Home")
 public class MyFirstMicroserviceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(MyFirstMicroserviceApplication.class, args);
 	}
 

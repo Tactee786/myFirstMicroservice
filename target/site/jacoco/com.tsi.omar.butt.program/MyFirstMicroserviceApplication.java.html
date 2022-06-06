@@ -10,24 +10,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@RequestMapping(&quot;/&quot;)
+@RequestMapping(&quot;/Home&quot;)
 public class MyFirstMicroserviceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
 
 	public static void main(String[] args) {
+<span class="nc" id="L19">		SpringApplication.run(MyFirstMicroserviceApplication.class, args);</span>
+<span class="nc" id="L20">	}</span>
 
-<span class="nc" id="L20">		SpringApplication.run(MyFirstMicroserviceApplication.class, args);</span>
-<span class="nc" id="L21">	}</span>
-
-<span class="fc" id="L23">	public MyFirstMicroserviceApplication(ActorRepository actorRepository){</span>
-<span class="fc" id="L24">		this.actorRepository =actorRepository;</span>
-<span class="fc" id="L25">	}</span>
+<span class="fc" id="L22">	public MyFirstMicroserviceApplication(ActorRepository actorRepository){</span>
+<span class="fc" id="L23">		this.actorRepository =actorRepository;</span>
+<span class="fc" id="L24">	}</span>
 
 	@GetMapping(&quot;/All_Actors&quot;)
 	public @ResponseBody
 	Iterable&lt;Actor&gt;getAllActors(){
-<span class="nc" id="L30">		return  actorRepository.findAll();</span>
+<span class="nc" id="L29">		return  actorRepository.findAll();</span>
 	}
 
 }
