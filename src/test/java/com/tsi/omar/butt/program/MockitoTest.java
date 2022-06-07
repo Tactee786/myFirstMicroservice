@@ -12,8 +12,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest{
@@ -49,7 +48,7 @@ public class MockitoTest{
         Assertions.assertEquals(Expected,Actual,"Actor was not added.");
     }
 
-    @Test//put  method for a
+    @Test//put  method for an actor
     public void updateActor(){
         Actor testActor = new Actor(1, "testFName", "testLName");
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
@@ -58,6 +57,18 @@ public class MockitoTest{
         verify(actorRepository).save(actorArgumentCaptor.capture());
         Actor Expected = actorArgumentCaptor.getValue();
         Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
+    }
+
+    @Test//delete method for an actor
+    public void deleteActor(){
+        Actor testActor = new Actor(1, "testFName", "testLName");
+        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
+        doNothing().when(actorRepository).deleteById(1);
+        Actor Actual = myFirstMicroserviceApplication.deleteActor(testActor.getActor_id()).getBody();
+        //ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        actorRepository.deleteById(testActor.getActor_id());
+        Actor Expected = testActor;
+        Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
     }
 
 }
