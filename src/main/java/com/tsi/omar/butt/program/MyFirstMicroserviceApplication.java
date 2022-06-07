@@ -24,26 +24,26 @@ public class MyFirstMicroserviceApplication {
 		this.actorRepository =actorRepository;
 	}
 
-	@GetMapping("/Get_All_Actors")
+	@GetMapping("/Get_All_Actors")//get all actors within the actor table
 	public @ResponseBody
 	Iterable<Actor>getAllActors(){
 		return  actorRepository.findAll();
 	}
 
-	@GetMapping("/Get_A_Actor")
+	@GetMapping("/Get_A_Actor")//get a actor from actor table with id given
 	public ResponseEntity<Actor>getAActor(@RequestParam Integer id){
 		Actor actor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exist with ID: " +id));
 		return ResponseEntity.ok(actor);
 	}
 
-	@PostMapping("/Post_A_Actor")
+	@PostMapping("/Post_A_Actor")//add an actor to the actor table in the database
 	public ResponseEntity<Actor> addActor(@RequestParam String first_name, String last_name){
 		Actor addActor = new Actor(first_name,last_name);
 		actorRepository.save(addActor);
 		return ResponseEntity.ok(addActor);
 	}
 
-	@PutMapping("/Put_A_Actor")
+	@PutMapping("/Put_A_Actor")//update an actor within the actor table with the given id
 	public ResponseEntity<Actor> updateActor(@RequestParam Integer id, String first_name, String last_name){
 		Actor updateActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with id: " + id));
 		updateActor.setFirst_name(first_name);
@@ -52,7 +52,7 @@ public class MyFirstMicroserviceApplication {
 		return ResponseEntity.ok(updateActor);
 	}
 
-	@DeleteMapping("/Delete_By_Id")
+	@DeleteMapping("/Delete_A_Actor")//delete an actor from the actor table with the given id
 	public ResponseEntity<Actor> deleteActor(@RequestParam Integer id){
 		Actor deleteActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with id: " + id));
 		actorRepository.deleteById(id);
