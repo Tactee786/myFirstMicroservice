@@ -25,12 +25,12 @@ public class MockitoTest{
     void setup(){
         myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository);
     }
-    @Test
+    @Test//get method for all actors
     public void getAllActors(){
         myFirstMicroserviceApplication.getAllActors();
         verify(actorRepository).findAll();
     }
-    @Test
+    @Test//get method for an actor
     public void getAActor(){
         Actor testActor = new Actor(1,"testFName", "testLName");
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
@@ -39,18 +39,26 @@ public class MockitoTest{
         verify(actorRepository).findById(id);
     }
 
-    @Test
+    @Test//post method for an actor
     public void addActor(){
         Actor testActor = new Actor(1,"testFName","testLName");
         Actor Actual = myFirstMicroserviceApplication.addActor(testActor.getFirst_name(), testActor.getLast_name()).getBody();
-        //System.out.println(Actual+ " :actual");
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         Actor Expected = actorArgumentCaptor.getValue();
-        //System.out.println(actorArgumentCaptor.getValue()+ " :expected");
-        Assertions.assertEquals(Expected,Actual,"help");
+        Assertions.assertEquals(Expected,Actual,"Actor was not added.");
     }
 
+    @Test//put  method for a
+    public void updateActor(){
+        Actor testActor = new Actor(1, "testFName", "testLName");
+        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
+        Actor Actual = myFirstMicroserviceApplication.updateActor(testActor.getActor_id(), testActor.getFirst_name(), testActor.getLast_name()).getBody();
+        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        verify(actorRepository).save(actorArgumentCaptor.capture());
+        Actor Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
+    }
 
 }
 //    @Test
