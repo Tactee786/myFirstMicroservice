@@ -29,7 +29,7 @@ public class MyFirstMicroserviceApplication {
 		return  actorRepository.findAll();
 	}
 
-	@GetMapping("/Get_A_Actor")//get a actor from actor table with id given
+	@GetMapping("/Get_A_Actor")//get an actor from actor table with id given
 	public ResponseEntity<Actor>getAActor(@RequestParam Integer id){
 		Actor actor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exist with ID: " +id));
 		return ResponseEntity.ok(actor);

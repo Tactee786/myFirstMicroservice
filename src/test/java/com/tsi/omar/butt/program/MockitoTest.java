@@ -87,7 +87,7 @@ public class MockitoTest{
 //        Actor testActor = new Actor("testFName", "testLName");
 //        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
 //        System.out.println(testActor.first_name + testActor.last_name);
-//        //Optional<Actor> answ = actorRepository.findById(1);
+//        //Optional<Actor> ans = actorRepository.findById(1);
 //        Integer id = 1;
 //        myFirstMicroserviceApplication.getAActor(id);
 //        //System.out.println(myFirstMicroserviceApplication.getAActor(id));
