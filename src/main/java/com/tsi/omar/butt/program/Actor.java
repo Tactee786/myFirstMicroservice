@@ -1,7 +1,6 @@
 package com.tsi.omar.butt.program;
 
 import org.springframework.data.annotation.Id;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +21,6 @@ public class Actor {
     public Actor(String first_name, String last_name){
         this.first_name = first_name;
         this.last_name = last_name;
-
     }
 
     public Actor(){}

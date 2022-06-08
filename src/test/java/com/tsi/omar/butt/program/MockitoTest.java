@@ -8,9 +8,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
-
 import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -24,22 +22,19 @@ public class MockitoTest{
     void setup(){
         myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository);
     }
+
     @Test//get method for all actors
     public void getAllActors(){
         myFirstMicroserviceApplication.getAllActors();
         verify(actorRepository).findAll();
     }
+
     @Test//get method for an actor
     public void getAActor(){
         Actor testActor = new Actor("testFName", "testLName");
         testActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
         Actor Actual = myFirstMicroserviceApplication.getAActor(testActor.getActor_id()).getBody();
-        //Integer id = 1;
-        //ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-        //verify(actorRepository).findById(actorArgumentCaptor.capture());
-        //myFirstMicroserviceApplication.getAActor(id);
-        //verify(actorRepository).findById(id);
         Actor Expected = testActor;
         Assertions.assertEquals(Expected,Actual,"Could not find actor with ID: ");
     }
@@ -77,11 +72,16 @@ public class MockitoTest{
         //ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         actorRepository.deleteById(testActor.getActor_id());
         Actor Expected = testActor;
-        //System.out.println(testActor);
         Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
     }
 
 }
+//getAActor test
+//Integer id = 1;
+//ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+//verify(actorRepository).findById(actorArgumentCaptor.capture());
+//myFirstMicroserviceApplication.getAActor(id);
+//verify(actorRepository).findById(id);
 //    @Test
 //    public void getAActor(){
 //        Actor testActor = new Actor("testFName", "testLName");

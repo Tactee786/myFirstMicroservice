@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @SpringBootApplication
@@ -59,6 +58,9 @@ public class MyFirstMicroserviceApplication {
 		return ResponseEntity.ok(deleteActor);
 	}
 
+
+}
+
 //	@DeleteMapping("/Delete_By_Id_1")
 //	public @ResponseBody
 //	void deleteById1(@RequestParam(name="id") int id){
@@ -74,4 +76,3 @@ public class MyFirstMicroserviceApplication {
 //		Actor addActor = new Actor(first_name,last_name);
 //		actorRepository.save(addActor);
 //	}
-}
