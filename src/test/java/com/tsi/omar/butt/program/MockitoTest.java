@@ -31,16 +31,23 @@ public class MockitoTest{
     }
     @Test//get method for an actor
     public void getAActor(){
-        Actor testActor = new Actor(1,"testFName", "testLName");
+        Actor testActor = new Actor("testFName", "testLName");
+        testActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
-        Integer id = 1;
-        myFirstMicroserviceApplication.getAActor(id);
-        verify(actorRepository).findById(id);
+        Actor Actual = myFirstMicroserviceApplication.getAActor(testActor.getActor_id()).getBody();
+        //Integer id = 1;
+        //ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        //verify(actorRepository).findById(actorArgumentCaptor.capture());
+        //myFirstMicroserviceApplication.getAActor(id);
+        //verify(actorRepository).findById(id);
+        Actor Expected = testActor;
+        Assertions.assertEquals(Expected,Actual,"Could not find actor with ID: ");
     }
 
     @Test//post method for an actor
     public void addActor(){
-        Actor testActor = new Actor(1,"testFName","testLName");
+        Actor testActor = new Actor("testFName","testLName");
+        testActor.setActor_id(1);
         Actor Actual = myFirstMicroserviceApplication.addActor(testActor.getFirst_name(), testActor.getLast_name()).getBody();
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
@@ -50,7 +57,8 @@ public class MockitoTest{
 
     @Test//put  method for an actor
     public void updateActor(){
-        Actor testActor = new Actor(1, "testFName", "testLName");
+        Actor testActor = new Actor("testFName", "testLName");
+        testActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
         Actor Actual = myFirstMicroserviceApplication.updateActor(testActor.getActor_id(), testActor.getFirst_name(), testActor.getLast_name()).getBody();
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
@@ -61,13 +69,15 @@ public class MockitoTest{
 
     @Test//delete method for an actor
     public void deleteActor(){
-        Actor testActor = new Actor(1, "testFName", "testLName");
+        Actor testActor = new Actor("testFName", "testLName");
+        testActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
         doNothing().when(actorRepository).deleteById(1);
         Actor Actual = myFirstMicroserviceApplication.deleteActor(testActor.getActor_id()).getBody();
         //ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         actorRepository.deleteById(testActor.getActor_id());
         Actor Expected = testActor;
+        //System.out.println(testActor);
         Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
     }
 
