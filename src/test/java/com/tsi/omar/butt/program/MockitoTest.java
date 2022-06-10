@@ -24,7 +24,7 @@ public class MockitoTest{
     }
 
     @Test//get method for all actors
-    public void getAllActors(){
+    void getAllActors(){
         myFirstMicroserviceApplication.getAllActors();
         verify(actorRepository).findAll();
     }
@@ -76,30 +76,3 @@ public class MockitoTest{
     }
 
 }
-//getAActor test
-//Integer id = 1;
-//ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-//verify(actorRepository).findById(actorArgumentCaptor.capture());
-//myFirstMicroserviceApplication.getAActor(id);
-//verify(actorRepository).findById(id);
-//    @Test
-//    public void getAActor(){
-//        Actor testActor = new Actor("testFName", "testLName");
-//        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
-//        System.out.println(testActor.first_name + testActor.last_name);
-//        //Optional<Actor> ans = actorRepository.findById(1);
-//        Integer id = 1;
-//        myFirstMicroserviceApplication.getAActor(id);
-//        //System.out.println(myFirstMicroserviceApplication.getAActor(id));
-//        verify(actorRepository).findById(id);
-//        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-//        System.out.println(actorRepository);
-//        System.out.println("before");
-//        verify(actorRepository).save(actorArgumentCaptor.capture());
-//        System.out.println("after");
-//        actorArgumentCaptor.getValue();
-//        System.out.println(actorArgumentCaptor.getValue());
-//        Assertions.assertEquals(testActor,testActor,"help");
-//        Integer id = 1;
-//        myFirstMicroserviceApplication.getAActor(id);
-//        verify(actorRepository).findById(id);

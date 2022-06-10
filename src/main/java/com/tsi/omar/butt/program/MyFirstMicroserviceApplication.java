@@ -15,6 +15,7 @@ public class MyFirstMicroserviceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(MyFirstMicroserviceApplication.class, args);
 	}
@@ -36,14 +37,14 @@ public class MyFirstMicroserviceApplication {
 	}
 
 	@PostMapping("/Post_A_Actor")//add an actor to the actor table in the database
-	public ResponseEntity<Actor> addActor(@RequestParam String first_name, String last_name){
+	public ResponseEntity<Actor> addActor(@RequestParam String first_name, @RequestParam String last_name){
 		Actor addActor = new Actor(first_name,last_name);
 		actorRepository.save(addActor);
 		return ResponseEntity.ok(addActor);
 	}
 
 	@PutMapping("/Put_A_Actor")//update an actor within the actor table with the given id
-	public ResponseEntity<Actor> updateActor(@RequestParam Integer id, String first_name, String last_name){
+	public ResponseEntity<Actor> updateActor(@RequestParam Integer id, @RequestParam String first_name, @RequestParam String last_name){
 		Actor updateActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with id: " + id));
 		updateActor.setFirst_name(first_name);
 		updateActor.setLast_name(last_name);
@@ -60,19 +61,3 @@ public class MyFirstMicroserviceApplication {
 
 
 }
-
-//	@DeleteMapping("/Delete_By_Id_1")
-//	public @ResponseBody
-//	void deleteById1(@RequestParam(name="id") int id){
-//		actorRepository.deleteById(id);
-//	}
-//	@GetMapping("/Get_A_Actor_1")
-//	public @ResponseBody
-//	Optional<Actor>getAActor(@RequestParam(name="id", name="first_name", name="last_name") int id, String first_name, String last_name){
-//		return  actorRepository.findById(id);
-//	}
-//	@PostMapping("/Post_A_Actor_1")
-//	public @ResponseBody void addActor1(@RequestParam String first_name, String last_name){
-//		Actor addActor = new Actor(first_name,last_name);
-//		actorRepository.save(addActor);
-//	}
