@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 //@SpringBootTest
 class MyFirstMicroserviceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 }
