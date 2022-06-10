@@ -13,7 +13,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class MockitoTest{
+class MockitoTest{
     private MyFirstMicroserviceApplication myFirstMicroserviceApplication;
     @Mock
     private ActorRepository actorRepository;
@@ -30,7 +30,7 @@ public class MockitoTest{
     }
 
     @Test//get method for an actor
-    public void getAActor(){
+    void getAActor(){
         Actor testActor = new Actor("testFName", "testLName");
         testActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
@@ -40,7 +40,7 @@ public class MockitoTest{
     }
 
     @Test//post method for an actor
-    public void addActor(){
+    void addActor(){
         Actor testActor = new Actor("testFName","testLName");
         testActor.setActor_id(1);
         Actor Actual = myFirstMicroserviceApplication.addActor(testActor.getFirst_name(), testActor.getLast_name()).getBody();
@@ -51,7 +51,7 @@ public class MockitoTest{
     }
 
     @Test//put  method for an actor
-    public void updateActor(){
+    void updateActor(){
         Actor testActor = new Actor("testFName", "testLName");
         testActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
@@ -63,7 +63,7 @@ public class MockitoTest{
     }
 
     @Test//delete method for an actor
-    public void deleteActor(){
+    void deleteActor(){
         Actor testActor = new Actor("testFName", "testLName");
         testActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
