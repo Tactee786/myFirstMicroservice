@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class MyFirstMicroserviceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
+	private String rubbishString;
 
 
 	public static void main(String[] args) {
