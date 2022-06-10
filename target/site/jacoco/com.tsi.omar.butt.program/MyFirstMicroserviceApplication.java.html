@@ -3,10 +3,10 @@
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 @SpringBootApplication
 @RestController
@@ -15,19 +15,50 @@ public class MyFirstMicroserviceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
 
+
 	public static void main(String[] args) {
-<span class="nc" id="L19">		SpringApplication.run(MyFirstMicroserviceApplication.class, args);</span>
-<span class="nc" id="L20">	}</span>
+<span class="nc" id="L20">		SpringApplication.run(MyFirstMicroserviceApplication.class, args);</span>
+<span class="nc" id="L21">	}</span>
 
-<span class="fc" id="L22">	public MyFirstMicroserviceApplication(ActorRepository actorRepository){</span>
-<span class="fc" id="L23">		this.actorRepository =actorRepository;</span>
-<span class="fc" id="L24">	}</span>
+<span class="fc" id="L23">	public MyFirstMicroserviceApplication(ActorRepository actorRepository){</span>
+<span class="fc" id="L24">		this.actorRepository =actorRepository;</span>
+<span class="fc" id="L25">	}</span>
 
-	@GetMapping(&quot;/All_Actors&quot;)
+	@GetMapping(&quot;/Get_All_Actors&quot;)//get all actors within the actor table
 	public @ResponseBody
 	Iterable&lt;Actor&gt;getAllActors(){
-<span class="nc" id="L29">		return  actorRepository.findAll();</span>
+<span class="fc" id="L30">		return  actorRepository.findAll();</span>
 	}
+
+	@GetMapping(&quot;/Get_A_Actor&quot;)//get an actor from actor table with id given
+	public ResponseEntity&lt;Actor&gt;getAActor(@RequestParam Integer id){
+<span class="pc" id="L35">		Actor actor = actorRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Actor does not exist with ID: &quot; +id));</span>
+<span class="fc" id="L36">		return ResponseEntity.ok(actor);</span>
+	}
+
+	@PostMapping(&quot;/Post_A_Actor&quot;)//add an actor to the actor table in the database
+	public ResponseEntity&lt;Actor&gt; addActor(@RequestParam String first_name, @RequestParam String last_name){
+<span class="fc" id="L41">		Actor addActor = new Actor(first_name,last_name);</span>
+<span class="fc" id="L42">		actorRepository.save(addActor);</span>
+<span class="fc" id="L43">		return ResponseEntity.ok(addActor);</span>
+	}
+
+	@PutMapping(&quot;/Put_A_Actor&quot;)//update an actor within the actor table with the given id
+	public ResponseEntity&lt;Actor&gt; updateActor(@RequestParam Integer id, @RequestParam String first_name, @RequestParam String last_name){
+<span class="pc" id="L48">		Actor updateActor = actorRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Actor does not exit with id: &quot; + id));</span>
+<span class="fc" id="L49">		updateActor.setFirst_name(first_name);</span>
+<span class="fc" id="L50">		updateActor.setLast_name(last_name);</span>
+<span class="fc" id="L51">		actorRepository.save(updateActor);</span>
+<span class="fc" id="L52">		return ResponseEntity.ok(updateActor);</span>
+	}
+
+	@DeleteMapping(&quot;/Delete_A_Actor&quot;)//delete an actor from the actor table with the given id
+	public ResponseEntity&lt;Actor&gt; deleteActor(@RequestParam Integer id){
+<span class="pc" id="L57">		Actor deleteActor = actorRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Actor does not exit with id: &quot; + id));</span>
+<span class="fc" id="L58">		actorRepository.deleteById(id);</span>
+<span class="fc" id="L59">		return ResponseEntity.ok(deleteActor);</span>
+	}
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,1 +1,8 @@
 com\tsi\omar\butt\program\MyFirstMicroserviceApplicationTests.class
+com\tsi\omar\butt\program\updateActorStepDef.class
+com\tsi\omar\butt\program\lookUpActorStepDef.class
+com\tsi\omar\butt\program\runCucumberTest.class
+com\tsi\omar\butt\program\deleteActorStepDef.class
+com\tsi\omar\butt\program\addActorStepDef.class
+com\tsi\omar\butt\program\ActorTest.class
+com\tsi\omar\butt\program\MockitoTest.class
