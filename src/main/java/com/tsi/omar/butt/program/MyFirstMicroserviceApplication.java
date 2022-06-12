@@ -56,6 +56,4 @@ public class MyFirstMicroserviceApplication {
 		actorRepository.deleteById(id);
 		return ResponseEntity.ok(deleteActor);
 	}
-
-
 }
