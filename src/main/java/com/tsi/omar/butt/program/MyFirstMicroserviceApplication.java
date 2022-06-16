@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @SpringBootApplication
 @RestController
 @RequestMapping("/Home")
+@CrossOrigin(origins = "*")
 public class MyFirstMicroserviceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
