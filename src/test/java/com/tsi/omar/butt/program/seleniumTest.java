@@ -21,7 +21,7 @@ public class seleniumTest {
 
     @Test
     public void chromeSessionTest(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Omar\\Desktop\\TSI\\5_abu_java\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", ".\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
         driver.quit();
@@ -29,7 +29,7 @@ public class seleniumTest {
 
     @Test
     public void checkWebsiteConnection(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Omar\\Desktop\\TSI\\5_abu_java\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", ".\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://localhost:3000/");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
@@ -38,7 +38,7 @@ public class seleniumTest {
 
     @Test
     public void checkActorForm(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Omar\\Desktop\\TSI\\5_abu_java\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", ".\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://localhost:3000/Actor");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
