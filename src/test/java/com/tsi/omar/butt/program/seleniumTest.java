@@ -24,7 +24,7 @@ public class seleniumTest {
     }
     @Test
     @Order(1)
-    public void checkWebsiteConnection(){
+    void checkWebsiteConnection(){
         Assertions.assertDoesNotThrow(() -> {
             driver.get("http://localhost:3000/");
         });
@@ -32,7 +32,7 @@ public class seleniumTest {
 
     @Test
     @Order(2)
-    public void checkActorForm(){
+    void checkActorForm(){
         driver.get("http://localhost:3000/Actor");
         WebElement addId = driver.findElement(By.className("SFAAIField"));
         addId.sendKeys("3");
