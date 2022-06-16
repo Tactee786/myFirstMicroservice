@@ -29,7 +29,6 @@ public class seleniumTest {
             driver.get("http://localhost:3000/");
         });
     }
-
     @Test
     @Order(2)
     void checkActorForm(){
@@ -38,7 +37,7 @@ public class seleniumTest {
         addId.sendKeys("3");
         WebElement submitButton = driver.findElement(By.className("SFAAISubmit"));
         submitButton.click();
-        WebElement element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/ol"));
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div[1]/ol"));
         Assertions.assertTrue(element.getText().contains("ID : 3"), "not ID : 3");
         Assertions.assertTrue(element.isDisplayed());
     }
