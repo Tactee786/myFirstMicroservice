@@ -35,27 +35,12 @@ public class MyFirstMicroserviceApplication {
 		return ResponseEntity.ok(actor);
 	}
 
-//	@PostMapping("/Post_A_Actor")//add an actor to the actor table in the database
-//	public ResponseEntity<Actor> addActor(@RequestParam String first_name, @RequestParam String last_name){
-//		Actor addActor = new Actor(first_name,last_name);
-//		actorRepository.save(addActor);
-//		return ResponseEntity.ok(addActor);
-//	}
-
 	@PostMapping("/Post_A_Actor")
 	public @ResponseBody ResponseEntity<Actor> addActor(@RequestBody Actor addActor){
 		actorRepository.save(addActor);
 		return ResponseEntity.ok(addActor);
 	}
 
-//	@PutMapping("/Put_A_Actor")//update an actor within the actor table with the given id
-//	public ResponseEntity<Actor> updateActor(@RequestParam Integer id, @RequestParam String first_name, @RequestParam String last_name){
-//		Actor updateActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with id: " + id));
-//		updateActor.setFirst_name(first_name);
-//		updateActor.setLast_name(last_name);
-//		actorRepository.save(updateActor);
-//		return ResponseEntity.ok(updateActor);
-//	}
 	@PutMapping("Put_A_Actor")
 	public @ResponseBody ResponseEntity<Actor> updateActor(@RequestBody Actor putActor){
 		Actor updateActor = actorRepository.findById(putActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
@@ -64,13 +49,6 @@ public class MyFirstMicroserviceApplication {
 		return ResponseEntity.ok(updateActor);
 	}
 
-
-//	@DeleteMapping("/Delete_A_Actor")//delete an actor from the actor table with the given id
-//	public ResponseEntity<Actor> deleteActor(@RequestParam Integer id){
-//		Actor deleteActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with id: " + id));
-//		actorRepository.deleteById(id);
-//		return ResponseEntity.ok(deleteActor);
-//	}
 	@DeleteMapping("/Delete_A_Actor")
 	public ResponseEntity<Actor> deleteActor(@RequestBody Actor delActor){
 		Actor deleteActor = actorRepository.findById(delActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
