@@ -43,8 +43,9 @@ public class MyFirstMicroserviceApplication {
 
 	@PutMapping("Put_A_Actor")
 	public @ResponseBody ResponseEntity<Actor> updateActor(@RequestBody Actor putActor){
-		actorRepository.findById(putActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
-		Actor updateActor = putActor;
+		Actor updateActor = actorRepository.findById(putActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
+		updateActor.first_name = putActor.first_name;
+		updateActor.last_name = putActor.last_name;
 		actorRepository.save(updateActor);
 		return ResponseEntity.ok(updateActor);
 	}
