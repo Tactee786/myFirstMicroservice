@@ -43,7 +43,7 @@ class MockitoTest{
     void addActor(){
         Actor testActor = new Actor("testFName","testLName");
         testActor.setActor_id(1);
-        Actor Actual = myFirstMicroserviceApplication.addActor(testActor.getFirst_name(), testActor.getLast_name()).getBody();
+        Actor Actual = myFirstMicroserviceApplication.addActor(testActor).getBody();
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         Actor Expected = actorArgumentCaptor.getValue();
@@ -54,8 +54,10 @@ class MockitoTest{
     void updateActor(){
         Actor testActor = new Actor("testFName", "testLName");
         testActor.setActor_id(1);
-        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
-        Actor Actual = myFirstMicroserviceApplication.updateActor(testActor.getActor_id(), testActor.getFirst_name(), testActor.getLast_name()).getBody();
+        Actor testUpdateActor = new Actor("testFNameUpdated" , "testLNameUpdated");
+        testUpdateActor.setActor_id(1);
+        when(actorRepository.findById(testActor.getActor_id())).thenReturn(Optional.of(testUpdateActor));
+        Actor Actual = myFirstMicroserviceApplication.updateActor(testUpdateActor).getBody();
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         Actor Expected = actorArgumentCaptor.getValue();

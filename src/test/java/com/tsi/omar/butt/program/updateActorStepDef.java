@@ -32,7 +32,7 @@ public class updateActorStepDef {
         id = 1;
         testActor = new Actor("testFName", "testLName");
         testActor.setActor_id(id);
-        updatedActor = new Actor();
+        updatedActor = new Actor("testFNameUpdated", "testLNameUpdated");
         updatedActor.setActor_id(id);
     }
     @When("I input the data into the database for update")
@@ -41,7 +41,7 @@ public class updateActorStepDef {
         when(actorRepository.findById(1)).thenReturn(Optional.of(updatedActor));
         String rFName = "replacedFName";
         String rLName = "replacedLName";
-        Actual = myFirstMicroserviceApplication.updateActor(updatedActor.getActor_id(), rFName, rLName).getBody();
+        Actual = myFirstMicroserviceApplication.updateActor(updatedActor).getBody();
     }
     @Then("I get the success return string for update")
     public void i_get_the_success_return_string_for_update() {
