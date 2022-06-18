@@ -56,19 +56,25 @@ public class MyFirstMicroserviceApplication {
 //		actorRepository.save(updateActor);
 //		return ResponseEntity.ok(updateActor);
 //	}
-	@PostMapping("Put_A_Actor")
-	public @ResponseBody ResponseEntity<Actor> updateActor(@RequestBody Actor actor){
-		Actor updateActor = actorRepository.findById(actor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
-		updateActor = actor;
+	@PutMapping("Put_A_Actor")
+	public @ResponseBody ResponseEntity<Actor> updateActor(@RequestBody Actor putActor){
+		Actor updateActor = actorRepository.findById(putActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
+		updateActor = putActor;
 		actorRepository.save(updateActor);
 		return ResponseEntity.ok(updateActor);
 	}
 
 
-	@DeleteMapping("/Delete_A_Actor")//delete an actor from the actor table with the given id
-	public ResponseEntity<Actor> deleteActor(@RequestParam Integer id){
-		Actor deleteActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with id: " + id));
-		actorRepository.deleteById(id);
+//	@DeleteMapping("/Delete_A_Actor")//delete an actor from the actor table with the given id
+//	public ResponseEntity<Actor> deleteActor(@RequestParam Integer id){
+//		Actor deleteActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with id: " + id));
+//		actorRepository.deleteById(id);
+//		return ResponseEntity.ok(deleteActor);
+//	}
+	@DeleteMapping("/Delete_A_Actor")
+	public ResponseEntity<Actor> deleteActor(@RequestBody Actor delActor){
+		Actor deleteActor = actorRepository.findById(delActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		actorRepository.deleteById(deleteActor.getActor_id());
 		return ResponseEntity.ok(deleteActor);
 	}
 }

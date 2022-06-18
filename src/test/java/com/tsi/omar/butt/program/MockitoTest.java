@@ -68,12 +68,14 @@ class MockitoTest{
     void deleteActor(){
         Actor testActor = new Actor("testFName", "testLName");
         testActor.setActor_id(1);
-        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
+        Actor testActorDelete = new Actor("testFName", "testLName");
+        testActorDelete.setActor_id(1);
+        when(actorRepository.findById(testActorDelete.getActor_id())).thenReturn(Optional.of(testActorDelete));
         doNothing().when(actorRepository).deleteById(1);
-        Actor Actual = myFirstMicroserviceApplication.deleteActor(testActor.getActor_id()).getBody();
+        Actor Actual = myFirstMicroserviceApplication.deleteActor(testActorDelete).getBody();
         //ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-        actorRepository.deleteById(testActor.getActor_id());
-        Actor Expected = testActor;
+        actorRepository.deleteById(testActorDelete.getActor_id());
+        Actor Expected = testActorDelete;
         Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
     }
 

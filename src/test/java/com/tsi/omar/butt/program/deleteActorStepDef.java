@@ -36,7 +36,7 @@ public class deleteActorStepDef {
     public void i_input_the_data_into_the_database_for_deleting() {
         setup();
         when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
-        Actual = myFirstMicroserviceApplication.deleteActor(testActor.getActor_id()).getBody();
+        Actual = myFirstMicroserviceApplication.deleteActor(testActor).getBody();
     }
     @Then("I get the success return string for delete")
     public void i_get_the_success_return_string_for_delete() {
