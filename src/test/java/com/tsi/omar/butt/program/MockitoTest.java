@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
@@ -17,10 +18,20 @@ class MockitoTest{
     private MyFirstMicroserviceApplication myFirstMicroserviceApplication;
     @Mock
     private ActorRepository actorRepository;
+    @Mock
+    private CategoryRepository categoryRepository;
+    @Mock
+    private FilmActorRepository filmActorRepository;
+    @Mock
+    private FilmCategoryRepository filmCategoryRepository;
+    @Mock
+    private FilmRepository filmRepository;
+    @Mock
+    private LanguageRepository languageRepository;
 
     @BeforeEach
     void setup(){
-        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository);
+        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, categoryRepository, filmActorRepository, filmCategoryRepository, filmRepository, languageRepository);
     }
 
     @Test//get method for all actors

@@ -16,10 +16,20 @@ public class updateActorStepDef {
     private MyFirstMicroserviceApplication myFirstMicroserviceApplication;
     @Mock
     private ActorRepository actorRepository;
+    @Mock
+    private CategoryRepository categoryRepository;
+    @Mock
+    private FilmActorRepository filmActorRepository;
+    @Mock
+    private FilmCategoryRepository filmCategoryRepository;
+    @Mock
+    private FilmRepository filmRepository;
+    @Mock
+    private LanguageRepository languageRepository;
     @BeforeEach
     void setup(){
         actorRepository =mock(ActorRepository.class);
-        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository);
+        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, categoryRepository, filmActorRepository, filmCategoryRepository, filmRepository, languageRepository);
     }
     int id;
     Actor testActor;

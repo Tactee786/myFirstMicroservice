@@ -14,15 +14,32 @@ import org.springframework.web.bind.annotation.*;
 public class MyFirstMicroserviceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
+	@Autowired
+	private FilmActorRepository filmActorRepository;
+	@Autowired
+	private FilmCategoryRepository filmCategoryRepository;
+	@Autowired
+	private FilmRepository filmRepository;
+	@Autowired
+	private LanguageRepository languageRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyFirstMicroserviceApplication.class, args);
 	}
 
-	public MyFirstMicroserviceApplication(ActorRepository actorRepository){
+	public MyFirstMicroserviceApplication(ActorRepository actorRepository, CategoryRepository categoryRepository, FilmActorRepository filmActorRepository, FilmCategoryRepository filmCategoryRepository, FilmRepository filmRepository, LanguageRepository languageRepository){
 		this.actorRepository =actorRepository;
+		this.categoryRepository =categoryRepository;
+		this.filmActorRepository =filmActorRepository;
+		this.filmCategoryRepository =filmCategoryRepository;
+		this.filmRepository =filmRepository;
+		this.languageRepository =languageRepository;
 	}
 
+	// Actor CRUD operations
 	@GetMapping("/Get_All_Actors")//get all actors within the actor table
 	public @ResponseBody
 	Iterable<Actor>getAllActors(){
@@ -56,4 +73,6 @@ public class MyFirstMicroserviceApplication {
 		actorRepository.deleteById(deleteActor.getActor_id());
 		return ResponseEntity.ok(deleteActor);
 	}
+
+
 }
