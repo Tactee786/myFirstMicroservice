@@ -15,7 +15,7 @@ public class Language {
 
     //Constructors
     public Language(String name){
-        this.language_id = language_id;
+        this.name = name;
     }
     public Language(){}
 
