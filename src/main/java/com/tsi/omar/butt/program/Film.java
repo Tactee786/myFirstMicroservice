@@ -2,6 +2,7 @@ package com.tsi.omar.butt.program;
 
 import org.springframework.data.annotation.Id;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="film")
@@ -13,26 +14,19 @@ public class Film {
     private int film_id;
     private String title;
     private String description;
-    private int release_year;
+    private Date release_year;
     private String language_id;
-    private String original_language_id;
-    private int rental_duration;
-    private int rental_rate;
     private int length;
-    private int replacement_cost;
     private String rating;
-    private String special_features;
 
     //Constructors
-    public Film(String title, String description, int release_year, String language_id, String original_language_id, int length, String rating, String special_features) {
+    public Film(String title, String description, Date release_year, String language_id, int length, String rating) {
         this.title = title;
         this.description = description;
         this.release_year = release_year;
         this.language_id = language_id;
-        this.original_language_id = original_language_id;
         this.length = length;
         this.rating = rating;
-        this.special_features = special_features;
     }
     public Film(){}
 
@@ -55,10 +49,10 @@ public class Film {
     public void setDescription(String description) {
         this.description = description;
     }
-    public int getRelease_year() {
+    public Date getRelease_year() {
         return release_year;
     }
-    public void setRelease_year(int release_year) {
+    public void setRelease_year(Date release_year) {
         this.release_year = release_year;
     }
     public String getLanguage_id() {
@@ -67,35 +61,11 @@ public class Film {
     public void setLanguage_id(String language_id) {
         this.language_id = language_id;
     }
-    public String getOriginal_language_id() {
-        return original_language_id;
-    }
-    public void setOriginal_language_id(String original_language_id) {
-        this.original_language_id = original_language_id;
-    }
-    public int getRental_duration() {
-        return rental_duration;
-    }
-    public void setRental_duration(int rental_duration) {
-        this.rental_duration = rental_duration;
-    }
-    public int getRental_rate() {
-        return rental_rate;
-    }
-    public void setRental_rate(int rental_rate) {
-        this.rental_rate = rental_rate;
-    }
     public int getLength() {
         return length;
     }
     public void setLength(int length) {
         this.length = length;
-    }
-    public int getReplacement_cost() {
-        return replacement_cost;
-    }
-    public void setReplacement_cost(int replacement_cost) {
-        this.replacement_cost = replacement_cost;
     }
     public String getRating() {
         return rating;
@@ -103,10 +73,5 @@ public class Film {
     public void setRating(String rating) {
         this.rating = rating;
     }
-    public String getSpecial_features() {
-        return special_features;
-    }
-    public void setSpecial_features(String special_features) {
-        this.special_features = special_features;
-    }
+
 }

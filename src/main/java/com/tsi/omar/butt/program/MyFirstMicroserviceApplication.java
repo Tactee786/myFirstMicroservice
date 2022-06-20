@@ -74,5 +74,27 @@ public class MyFirstMicroserviceApplication {
 		return ResponseEntity.ok(deleteActor);
 	}
 
+	// Film CRUD operations
+	@GetMapping("/Get_All_Films")
+	public @ResponseBody Iterable<Film> getAllFilms(){
+		return filmRepository.findAll();
+	}
+
+	@GetMapping("Get_All_FilmActor")
+	public @ResponseBody Iterable<FilmActor> getAllFilmActors() {
+		return filmActorRepository.findAll();
+	}
+
+	@GetMapping("Get_All_FilmCategory")
+	public @ResponseBody Iterable<FilmCategory> getAllFilmCategories(){
+		return filmCategoryRepository.findAll();
+	}
+
+	@GetMapping("Get_All_Category")
+	public @ResponseBody Iterable<Category> getAllCategory(){
+		return categoryRepository.findAll();
+	}
+
+
 
 }
