@@ -41,9 +41,9 @@ public class updateActorStepDef {
     public void i_have_the_actor_information_and_id_number() {
         id = 1;
         testActor = new Actor("testFName", "testLName");
-        testActor.setActor_id(id);
+        testActor.setActorId(id);
         updatedActor = new Actor("testFNameUpdated", "testLNameUpdated");
-        updatedActor.setActor_id(id);
+        updatedActor.setActorId(id);
     }
     @When("I input the data into the database for update")
     public void i_input_the_data_into_the_database_for_update() {

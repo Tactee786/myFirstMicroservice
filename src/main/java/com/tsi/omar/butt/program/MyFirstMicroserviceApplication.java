@@ -7,6 +7,8 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @SpringBootApplication
 @RestController
 @RequestMapping("/Home")
@@ -60,17 +62,17 @@ public class MyFirstMicroserviceApplication {
 
 	@PutMapping("Put_A_Actor")
 	public @ResponseBody ResponseEntity<Actor> updateActor(@RequestBody Actor putActor){
-		Actor updateActor = actorRepository.findById(putActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
-		updateActor.first_name = putActor.first_name;
-		updateActor.last_name = putActor.last_name;
+		Actor updateActor = actorRepository.findById(putActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
+		updateActor.firstName = putActor.firstName;
+		updateActor.lastName = putActor.lastName;
 		actorRepository.save(updateActor);
 		return ResponseEntity.ok(updateActor);
 	}
 
 	@DeleteMapping("/Delete_A_Actor")
 	public ResponseEntity<Actor> deleteActor(@RequestBody Actor delActor){
-		Actor deleteActor = actorRepository.findById(delActor.getActor_id()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
-		actorRepository.deleteById(deleteActor.getActor_id());
+		Actor deleteActor = actorRepository.findById(delActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		actorRepository.deleteById(deleteActor.getActorId());
 		return ResponseEntity.ok(deleteActor);
 	}
 
@@ -95,6 +97,33 @@ public class MyFirstMicroserviceApplication {
 		return categoryRepository.findAll();
 	}
 
+	@GetMapping("Get_Films_By_Keyword")
+	public Iterable<Film> getFilmsByKeyword(@RequestParam String keyword){
+		keyword = "%" + keyword + "%";
+		return filmRepository.findByTitleLike(keyword);
+	}
 
+	@GetMapping("Get_Film_By_Id")
+	public ResponseEntity<Film>getAFilm(@RequestParam Integer id){
+		Film film = filmRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exist with ID: " +id));
+		return ResponseEntity.ok(film);
+	}
+
+	@GetMapping("Get_Language")
+	public ResponseEntity<Language> getLanguageName(@RequestParam int id){
+		Language language = languageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Actor does not exist with ID: " +id));
+		return ResponseEntity.ok(language);
+	}
+
+	@GetMapping("Get_Films_By_Category")
+	public Iterable<Film> getFilmsByCategory(@RequestParam String name){
+
+//		Category catIdObj = categoryRepository.findByName(name);
+//		int catIdInt = catIdObj.getCategoryId();
+//		FilmCategory filmsFrom = FilmCategoryRepository.findByCategoryId(catIdInt);
+//		Iterable<FilmCategory> filmCatIdObj = filmCategoryRepository.findByCategoryId(catIdInt);
+//		int test123 = filmCatIdObj.
+		return null;
+	}
 
 }

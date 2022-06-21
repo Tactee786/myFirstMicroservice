@@ -1,6 +1,6 @@
 package com.tsi.omar.butt.program;
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 
 @Entity
@@ -10,26 +10,26 @@ public class FilmActor {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int actor_id;
-    private int film_id;
+    private int actorId;
+    private int filmId;
     //Constructors
-    public FilmActor(int actor_id, int film_id){
-        this.actor_id = actor_id;
-        this.film_id = film_id;
+    public FilmActor(int actorId, int filmId){
+        this.actorId = actorId;
+        this.filmId = filmId;
     }
     public FilmActor(){}
 
     //Methods
-    public int getActor_id() {
-        return actor_id;
+    public int getActorId() {
+        return actorId;
     }
-    public void setActor_id(int actor_id) {
-        this.actor_id = actor_id;
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
     }
-    public int getFilm_id() {
-        return film_id;
+    public int getFilmId() {
+        return filmId;
     }
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
     }
 }

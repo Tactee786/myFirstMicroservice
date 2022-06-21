@@ -8,36 +8,36 @@ class ActorTest {
     @Test
     void testGetActor_id(){
         Actor testActor = new Actor("testFName", "testLName");
-        testActor.setActor_id(1);
-        Assertions.assertEquals(1, testActor.getActor_id(), "id not there.");
+        testActor.setActorId(1);
+        Assertions.assertEquals(1, testActor.getActorId(), "id not there.");
     }
     @Test
     void testSetActor_id(){
         Actor testActor = new Actor("testFName", "testLName");
-        testActor.setActor_id(1);
-        Assertions.assertEquals(1, testActor.getActor_id(), "id not set.");
+        testActor.setActorId(1);
+        Assertions.assertEquals(1, testActor.getActorId(), "id not set.");
     }
     @Test
     void testGetFirst_name(){
         Actor testActor = new Actor("testFName", "testLName");
-        Assertions.assertEquals("testFName", testActor.getFirst_name(), "first name not found/set.");
+        Assertions.assertEquals("testFName", testActor.getFirstName(), "first name not found/set.");
     }
     @Test
     void testSetFirst_name(){
         Actor testActor = new Actor("testFName", "testLName");
-        testActor.setFirst_name("replacedFName");
-        Assertions.assertEquals("replacedFName", testActor.getFirst_name(), "first name not set.");
+        testActor.setFirstName("replacedFName");
+        Assertions.assertEquals("replacedFName", testActor.getFirstName(), "first name not set.");
     }
     @Test
     void testGetLast_name(){
         Actor testActor = new Actor("testFName", "testLName");
-        testActor.getLast_name();
-        Assertions.assertEquals("testLName", testActor.getLast_name(), "last name not found/set.");
+        testActor.getLastName();
+        Assertions.assertEquals("testLName", testActor.getLastName(), "last name not found/set.");
     }
     @Test
     void testSetLast_name(){
         Actor testActor = new Actor("testFName", "testLName");
-        testActor.setLast_name("replacedLName");
-        Assertions.assertEquals("replacedLName", testActor.getLast_name(), "last name not set.");
+        testActor.setLastName("replacedLName");
+        Assertions.assertEquals("replacedLName", testActor.getLastName(), "last name not set.");
     }
 }

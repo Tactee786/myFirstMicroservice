@@ -38,7 +38,7 @@ public class addActorStepDef {
     public void i_have_the_actor_information() {
         id = 1;
         testActor = new Actor("testFName", "testLName");
-        testActor.setActor_id(id);
+        testActor.setActorId(id);
     }
     @When("I input the data into the database for adding an actor")
     public void i_input_the_data_into_the_database_for_adding_an_actor() {

@@ -1,8 +1,10 @@
 package com.tsi.omar.butt.program;
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="film")
@@ -11,31 +13,45 @@ public class Film {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int film_id;
+    private int filmId;
     private String title;
     private String description;
-    private Date release_year;
-    private String language_id;
+    private Date releaseYear;
+    private String languageId;
     private int length;
     private String rating;
 
+
+    //Mapping the many-to-many relationship between Film and Category into Film.
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "film_category",
+            joinColumns = {
+                    @JoinColumn(name ="filmId", referencedColumnName = "filmId", nullable = false, updatable = false)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", nullable = false, updatable = false)
+            })
+    private Set<Category> category = new HashSet<>();
+
+
+
     //Constructors
-    public Film(String title, String description, Date release_year, String language_id, int length, String rating) {
+    public Film(String title, String description, Date releaseYear, String languageId, int length, String rating) {
         this.title = title;
         this.description = description;
-        this.release_year = release_year;
-        this.language_id = language_id;
+        this.releaseYear = releaseYear;
+        this.languageId = languageId;
         this.length = length;
         this.rating = rating;
     }
     public Film(){}
 
     //Methods
-    public int getFilm_id() {
-        return film_id;
+    public int getFilmId() {
+        return filmId;
     }
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
     }
     public String getTitle() {
         return title;
@@ -49,17 +65,17 @@ public class Film {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Date getRelease_year() {
-        return release_year;
+    public Date getReleaseYear() {
+        return releaseYear;
     }
-    public void setRelease_year(Date release_year) {
-        this.release_year = release_year;
+    public void setReleaseYear(Date releaseYear) {
+        this.releaseYear = releaseYear;
     }
-    public String getLanguage_id() {
-        return language_id;
+    public String getLanguageId() {
+        return languageId;
     }
-    public void setLanguage_id(String language_id) {
-        this.language_id = language_id;
+    public void setLanguageId(String languageId) {
+        this.languageId = languageId;
     }
     public int getLength() {
         return length;
@@ -73,5 +89,11 @@ public class Film {
     public void setRating(String rating) {
         this.rating = rating;
     }
+    public Set<Category> getCategory() {
+        return category;
+    }
 
+    public void setCategory(Set<Category> category) {
+        this.category = category;
+    }
 }

@@ -40,10 +40,7 @@ public class seleniumTest {
         addId.sendKeys("3");
         WebElement submitButton = driver.findElement(By.className("SFAAISubmit"));
         submitButton.click();
-        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(1)).pollingEvery(Duration.ofMillis(200)).ignoring(NoSuchElementException.class);
-        WebElement element = (new WebDriverWait(driver, Duration.ofSeconds(5)))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("ID")));
+        WebElement element = (new WebDriverWait(driver, Duration.ofSeconds(5))).until(ExpectedConditions.visibilityOfElementLocated(By.id("ID")));
         Assertions.assertTrue(element.getText().contains("ID : 3"), "not ID : 3");
         Assertions.assertTrue(element.isDisplayed());
     }

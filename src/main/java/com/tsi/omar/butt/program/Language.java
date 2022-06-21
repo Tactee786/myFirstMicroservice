@@ -1,6 +1,6 @@
 package com.tsi.omar.butt.program;
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +10,7 @@ public class Language {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int language_id;
+    private int languageId;
     private String name;
 
     //Constructors
@@ -20,11 +20,11 @@ public class Language {
     public Language(){}
 
     //Methods
-    public int getLanguage_id() {
-        return language_id;
+    public int getLanguageId() {
+        return languageId;
     }
-    public void setLanguage_id(int language_id) {
-        this.language_id = language_id;
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
     }
     public String getName() {
         return name;

@@ -37,13 +37,13 @@ public class lookUpActorStepDef {
     public void i_have_the_actors_id_number() {
         id = 1;
         testActor = new Actor("testFName", "testLName");
-        testActor.setActor_id(id);
+        testActor.setActorId(id);
     }
     @When("I input the id into the search")
     public void i_input_the_id_into_the_search() {
         setup();
         when(actorRepository.findById(id)).thenReturn(Optional.of(testActor));
-        Actual = myFirstMicroserviceApplication.getAActor(testActor.getActor_id()).getBody();
+        Actual = myFirstMicroserviceApplication.getAActor(testActor.getActorId()).getBody();
     }
     @Then("I get the string with the actors information")
     public void i_get_the_string_with_the_actors_information() {
