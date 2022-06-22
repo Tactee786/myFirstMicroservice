@@ -178,8 +178,8 @@ class MockitoTest{
     void updateCategory(){
         Category testCategory = new Category(1, "testCategory");
         testCategory.setCategoryId(1);
-        Category testCategoryUpdated = new Category(2, "testCategory");
-        testCategory.setCategoryId(2);
+        Category testCategoryUpdated = new Category(1, "testCategoryUpdated");
+        testCategoryUpdated.setCategoryId(1);
         when(categoryRepository.findById(testCategory.getCategoryId())).thenReturn(Optional.of(testCategoryUpdated));
         Category Actual = myFirstMicroserviceApplication.updateCategory(testCategoryUpdated).getBody();
         ArgumentCaptor<Category> actorArgumentCaptor = ArgumentCaptor.forClass(Category.class);
@@ -198,6 +198,60 @@ class MockitoTest{
         Category Actual = myFirstMicroserviceApplication.deleteCategory(testCategoryDelete).getBody();
         categoryRepository.deleteById(testCategoryDelete.getCategoryId());
         Category Expected = testCategoryDelete;
+        Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
+    }
+
+    //----------------------------
+    // Language CRUD operation Tests
+    //----------------------------
+    @Test//get method for all languages
+    void getAllLanguage(){
+        myFirstMicroserviceApplication.getAllLanguages();
+        verify(languageRepository).findAll();
+    }
+    @Test//get method for a Language
+    void getALanguage(){
+        Language testLanguage = new Language("testLanguage");
+        testLanguage.setLanguageId(1);
+        when(languageRepository.findById(1)).thenReturn(Optional.of(testLanguage));
+        Language Actual = myFirstMicroserviceApplication.getLanguageName(testLanguage.getLanguageId()).getBody();
+        Language Expected = testLanguage;
+        Assertions.assertEquals(Expected,Actual,"Could not find Language with ID: ");
+    }
+    @Test//post method for a Language
+    void addLanguage(){
+        Language testLanguage = new Language("testLanguage");
+        testLanguage.setLanguageId(1);
+        Language Actual = myFirstMicroserviceApplication.addLanguage(testLanguage).getBody();
+        ArgumentCaptor<Language> actorArgumentCaptor = ArgumentCaptor.forClass(Language.class);
+        verify(languageRepository).save(actorArgumentCaptor.capture());
+        Language Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Language was not added.");
+    }
+    @Test//put  method for a Language
+    void updateLanguage(){
+        Language testLanguage = new Language("testLanguage");
+        testLanguage.setLanguageId(1);
+        Language testLanguageUpdated = new Language("testLanguageUpdated");
+        testLanguageUpdated.setLanguageId(1);
+        when(languageRepository.findById(testLanguage.getLanguageId())).thenReturn(Optional.of(testLanguageUpdated));
+        Language Actual = myFirstMicroserviceApplication.updateLanguage(testLanguageUpdated).getBody();
+        ArgumentCaptor<Language> actorArgumentCaptor = ArgumentCaptor.forClass(Language.class);
+        verify(languageRepository).save(actorArgumentCaptor.capture());
+        Language Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Language was not updated.");
+    }
+    @Test//delete method for a category
+    void deleteLanguage(){
+        Language testLanguage = new Language("testLanguage");
+        testLanguage.setLanguageId(1);
+        Language testCategoryDelete = new Language("testLanguage");
+        testCategoryDelete.setLanguageId(1);
+        when(languageRepository.findById(testCategoryDelete.getLanguageId())).thenReturn(Optional.of(testCategoryDelete));
+        doNothing().when(languageRepository).deleteById(1);
+        Language Actual = myFirstMicroserviceApplication.deleteLanguage(testCategoryDelete).getBody();
+        languageRepository.deleteById(testCategoryDelete.getLanguageId());
+        Language Expected = testCategoryDelete;
         Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
     }
 }
