@@ -91,7 +91,7 @@ class MockitoTest{
     //----------------------------
     // Film CRUD operation Tests
     //----------------------------
-    @Test//get method for all film
+    @Test//get method for all films
     void getAllFilms(){
         myFirstMicroserviceApplication.getAllFilms();
         verify(filmRepository).findAll();
@@ -104,7 +104,7 @@ class MockitoTest{
         when(filmRepository.findById(1)).thenReturn(Optional.of(testFilm));
         Film Actual = myFirstMicroserviceApplication.getAFilm(testFilm.getFilmId()).getBody();
         Film Expected = testFilm;
-        Assertions.assertEquals(Expected,Actual,"Could not find film with ID: ");
+        Assertions.assertEquals(Expected,Actual,"Could not find Film with ID: ");
     }
     @Test//post method for a film
     void addFilm(){
@@ -129,7 +129,7 @@ class MockitoTest{
         ArgumentCaptor<Film> actorArgumentCaptor = ArgumentCaptor.forClass(Film.class);
         verify(filmRepository).save(actorArgumentCaptor.capture());
         Film Expected = actorArgumentCaptor.getValue();
-        Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
+        Assertions.assertEquals(Expected,Actual,"Film was not updated.");
     }
     @Test//delete method for a film
     void deleteFilm(){
@@ -144,7 +144,7 @@ class MockitoTest{
         //ArgumentCaptor<Film> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         filmRepository.deleteById(testFilmDelete.getFilmId());
         Film Expected = testFilmDelete;
-        Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
+        Assertions.assertEquals(Expected,Actual,"Film was not deleted.");
     }
 
     //----------------------------
@@ -162,7 +162,7 @@ class MockitoTest{
         when(categoryRepository.findById(1)).thenReturn(Optional.of(testCategory));
         Category Actual = myFirstMicroserviceApplication.getACategory(testCategory.getCategoryId()).getBody();
         Category Expected = testCategory;
-        Assertions.assertEquals(Expected,Actual,"Could not find film with ID: ");
+        Assertions.assertEquals(Expected,Actual,"Could not find Category with ID: ");
     }
     @Test//post method for a category
     void addCategory(){
@@ -172,7 +172,7 @@ class MockitoTest{
         ArgumentCaptor<Category> actorArgumentCaptor = ArgumentCaptor.forClass(Category.class);
         verify(categoryRepository).save(actorArgumentCaptor.capture());
         Category Expected = actorArgumentCaptor.getValue();
-        Assertions.assertEquals(Expected,Actual,"Film was not added.");
+        Assertions.assertEquals(Expected,Actual,"Category was not added.");
     }
     @Test//put  method for a category
     void updateCategory(){
@@ -185,7 +185,7 @@ class MockitoTest{
         ArgumentCaptor<Category> actorArgumentCaptor = ArgumentCaptor.forClass(Category.class);
         verify(categoryRepository).save(actorArgumentCaptor.capture());
         Category Expected = actorArgumentCaptor.getValue();
-        Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
+        Assertions.assertEquals(Expected,Actual,"Category was not updated.");
     }
     @Test//delete method for a category
     void deleteCategory(){
@@ -198,7 +198,7 @@ class MockitoTest{
         Category Actual = myFirstMicroserviceApplication.deleteCategory(testCategoryDelete).getBody();
         categoryRepository.deleteById(testCategoryDelete.getCategoryId());
         Category Expected = testCategoryDelete;
-        Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
+        Assertions.assertEquals(Expected,Actual,"Category was not deleted.");
     }
 
     //----------------------------
@@ -241,7 +241,7 @@ class MockitoTest{
         Language Expected = actorArgumentCaptor.getValue();
         Assertions.assertEquals(Expected,Actual,"Language was not updated.");
     }
-    @Test//delete method for a category
+    @Test//delete method for a Language
     void deleteLanguage(){
         Language testLanguage = new Language("testLanguage");
         testLanguage.setLanguageId(1);
@@ -252,6 +252,6 @@ class MockitoTest{
         Language Actual = myFirstMicroserviceApplication.deleteLanguage(testCategoryDelete).getBody();
         languageRepository.deleteById(testCategoryDelete.getLanguageId());
         Language Expected = testCategoryDelete;
-        Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
+        Assertions.assertEquals(Expected,Actual,"Language was not deleted.");
     }
 }
