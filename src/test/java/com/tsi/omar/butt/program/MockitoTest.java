@@ -42,7 +42,6 @@ class MockitoTest{
         myFirstMicroserviceApplication.getAllActors();
         verify(actorRepository).findAll();
     }
-
     @Test//get method for an actor
     void getAActor(){
         Actor testActor = new Actor("testFName", "testLName");
@@ -52,7 +51,6 @@ class MockitoTest{
         Actor Expected = testActor;
         Assertions.assertEquals(Expected,Actual,"Could not find actor with ID: ");
     }
-
     @Test//post method for an actor
     void addActor(){
         Actor testActor = new Actor("testFName","testLName");
@@ -63,7 +61,6 @@ class MockitoTest{
         Actor Expected = actorArgumentCaptor.getValue();
         Assertions.assertEquals(Expected,Actual,"Actor was not added.");
     }
-
     @Test//put  method for an actor
     void updateActor(){
         Actor testActor = new Actor("testFName", "testLName");
@@ -77,7 +74,6 @@ class MockitoTest{
         Actor Expected = actorArgumentCaptor.getValue();
         Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
     }
-
     @Test//delete method for an actor
     void deleteActor(){
         Actor testActor = new Actor("testFName", "testLName");
@@ -87,7 +83,6 @@ class MockitoTest{
         when(actorRepository.findById(testActorDelete.getActorId())).thenReturn(Optional.of(testActorDelete));
         doNothing().when(actorRepository).deleteById(1);
         Actor Actual = myFirstMicroserviceApplication.deleteActor(testActorDelete).getBody();
-        //ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         actorRepository.deleteById(testActorDelete.getActorId());
         Actor Expected = testActorDelete;
         Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
@@ -96,7 +91,7 @@ class MockitoTest{
     //----------------------------
     // Film CRUD operation Tests
     //----------------------------
-    @Test//get method for a film
+    @Test//get method for all film
     void getAllFilms(){
         myFirstMicroserviceApplication.getAllFilms();
         verify(filmRepository).findAll();
@@ -122,7 +117,7 @@ class MockitoTest{
         Film Expected = actorArgumentCaptor.getValue();
         Assertions.assertEquals(Expected,Actual,"Film was not added.");
     }
-    @Test//put  method for an actor
+    @Test//put  method for a film
     void updateFilm(){
         Date testDate = new Date();
         Film testFilm = new Film("testTitle", "testDescription", testDate , "1",  69, "18");
@@ -136,7 +131,7 @@ class MockitoTest{
         Film Expected = actorArgumentCaptor.getValue();
         Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
     }
-    @Test//delete method for an actor
+    @Test//delete method for a film
     void deleteFilm(){
         Date testDate = new Date();
         Film testFilm = new Film("testTitle", "testDescription", testDate , "1",  69, "18");
@@ -149,6 +144,60 @@ class MockitoTest{
         //ArgumentCaptor<Film> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         filmRepository.deleteById(testFilmDelete.getFilmId());
         Film Expected = testFilmDelete;
+        Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
+    }
+
+    //----------------------------
+    // Category CRUD operation Tests
+    //----------------------------
+    @Test//get method for all categories
+    void getAllCategory(){
+        myFirstMicroserviceApplication.getAllFilms();
+        verify(filmRepository).findAll();
+    }
+    @Test//get method for a category
+    void getACategory(){
+        Category testCategory = new Category(1, "testCategory");
+        testCategory.setCategoryId(1);
+        when(categoryRepository.findById(1)).thenReturn(Optional.of(testCategory));
+        Category Actual = myFirstMicroserviceApplication.getACategory(testCategory.getCategoryId()).getBody();
+        Category Expected = testCategory;
+        Assertions.assertEquals(Expected,Actual,"Could not find film with ID: ");
+    }
+    @Test//post method for a category
+    void addCategory(){
+        Category testCategory = new Category(1, "testCategory");
+        testCategory.setCategoryId(1);
+        Category Actual = myFirstMicroserviceApplication.addCategory(testCategory).getBody();
+        ArgumentCaptor<Category> actorArgumentCaptor = ArgumentCaptor.forClass(Category.class);
+        verify(categoryRepository).save(actorArgumentCaptor.capture());
+        Category Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Film was not added.");
+    }
+    @Test//put  method for a category
+    void updateCategory(){
+        Category testCategory = new Category(1, "testCategory");
+        testCategory.setCategoryId(1);
+        Category testCategoryUpdated = new Category(2, "testCategory");
+        testCategory.setCategoryId(2);
+        when(categoryRepository.findById(testCategory.getCategoryId())).thenReturn(Optional.of(testCategoryUpdated));
+        Category Actual = myFirstMicroserviceApplication.updateCategory(testCategoryUpdated).getBody();
+        ArgumentCaptor<Category> actorArgumentCaptor = ArgumentCaptor.forClass(Category.class);
+        verify(categoryRepository).save(actorArgumentCaptor.capture());
+        Category Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
+    }
+    @Test//delete method for a category
+    void deleteCategory(){
+        Category testCategory = new Category(1, "testCategory");
+        testCategory.setCategoryId(1);
+        Category testCategoryDelete = new Category(1, "testCategory");
+        testCategory.setCategoryId(1);
+        when(categoryRepository.findById(testCategoryDelete.getCategoryId())).thenReturn(Optional.of(testCategoryDelete));
+        doNothing().when(categoryRepository).deleteById(1);
+        Category Actual = myFirstMicroserviceApplication.deleteCategory(testCategoryDelete).getBody();
+        categoryRepository.deleteById(testCategoryDelete.getCategoryId());
+        Category Expected = testCategoryDelete;
         Assertions.assertEquals(Expected,Actual,"Actor was not deleted.");
     }
 }
