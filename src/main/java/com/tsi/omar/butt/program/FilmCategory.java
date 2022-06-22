@@ -13,27 +13,27 @@ public class FilmCategory {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int filmId;
-    private int categoryId;
+    private Integer filmId;
+    private Integer categoryId;
 
     //Constructors
-    public FilmCategory(int filmId, int categoryId){
+    public FilmCategory(Integer filmId, Integer categoryId){
         this.filmId = filmId;
         this.categoryId = categoryId;
     }
     public FilmCategory(){}
 
     //Methods
-    public int getFilmId() {
+    public Integer getFilmId() {
         return filmId;
     }
-    public void setFilmId(int filmId) {
+    public void setFilmId(Integer filmId) {
         this.filmId = filmId;
     }
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 }
