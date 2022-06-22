@@ -92,7 +92,6 @@ public class Film {
     public Set<Category> getCategory() {
         return category;
     }
-
     public void setCategory(Set<Category> category) {
         this.category = category;
     }
