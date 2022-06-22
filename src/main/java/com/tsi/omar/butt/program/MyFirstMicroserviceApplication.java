@@ -64,7 +64,7 @@ public class MyFirstMicroserviceApplication {
 
 	@PutMapping("Put_A_Actor")
 	public @ResponseBody ResponseEntity<Actor> updateActor(@RequestBody Actor putActor){
-		Actor updateActor = actorRepository.findById(putActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with the given ID. "));
+		Actor updateActor = actorRepository.findById(putActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exist with the given ID. "));
 		updateActor.firstName = putActor.firstName;
 		updateActor.lastName = putActor.lastName;
 		actorRepository.save(updateActor);
@@ -73,7 +73,7 @@ public class MyFirstMicroserviceApplication {
 
 	@DeleteMapping("/Delete_A_Actor")
 	public ResponseEntity<Actor> deleteActor(@RequestBody Actor delActor){
-		Actor deleteActor = actorRepository.findById(delActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		Actor deleteActor = actorRepository.findById(delActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exist with given ID"));
 		actorRepository.deleteById(deleteActor.getActorId());
 		return ResponseEntity.ok(deleteActor);
 	}
@@ -113,7 +113,7 @@ public class MyFirstMicroserviceApplication {
 
 	@DeleteMapping("/Delete_A_Film")
 	public ResponseEntity<Film> deleteFilm(@RequestBody Film delFilm){
-		Film deleteFilm = filmRepository.findById(delFilm.getFilmId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		Film deleteFilm = filmRepository.findById(delFilm.getFilmId()).orElseThrow(() -> new ResourceNotFoundException("Film does not exist with given ID"));
 		filmRepository.deleteById(deleteFilm.getFilmId());
 		return ResponseEntity.ok(deleteFilm);
 	}
@@ -148,7 +148,7 @@ public class MyFirstMicroserviceApplication {
 
 	@DeleteMapping("/Delete_A_Category")
 	public ResponseEntity<Category> deleteCategory(@RequestBody Category delCategory){
-		Category deleteCategory = categoryRepository.findById(delCategory.getCategoryId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		Category deleteCategory = categoryRepository.findById(delCategory.getCategoryId()).orElseThrow(() -> new ResourceNotFoundException("Category does not exist with given ID"));
 		categoryRepository.deleteById(deleteCategory.getCategoryId());
 		return ResponseEntity.ok(deleteCategory);
 	}
@@ -175,7 +175,7 @@ public class MyFirstMicroserviceApplication {
 
 	@PutMapping("Put_A_Language")
 	public @ResponseBody ResponseEntity<Language> updateLanguage(@RequestBody Language putLanguage){
-		Language updateLanguage = languageRepository.findById(putLanguage.getLanguageId()).orElseThrow(() -> new ResourceNotFoundException("Category does not exit with the given ID. "));
+		Language updateLanguage = languageRepository.findById(putLanguage.getLanguageId()).orElseThrow(() -> new ResourceNotFoundException("Language does not exit with the given ID. "));
 		updateLanguage.name = putLanguage.name;
 		languageRepository.save(updateLanguage);
 		return ResponseEntity.ok(updateLanguage);
@@ -183,7 +183,7 @@ public class MyFirstMicroserviceApplication {
 
 	@DeleteMapping("/Delete_A_Language")
 	public ResponseEntity<Language> deleteLanguage(@RequestBody Language delLanguage){
-		Language deleteLanguage = languageRepository.findById(delLanguage.getLanguageId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		Language deleteLanguage = languageRepository.findById(delLanguage.getLanguageId()).orElseThrow(() -> new ResourceNotFoundException("Language does not exist with given ID"));
 		languageRepository.deleteById(deleteLanguage.getLanguageId());
 		return ResponseEntity.ok(deleteLanguage);
 	}
@@ -210,7 +210,7 @@ public class MyFirstMicroserviceApplication {
 
 	@PutMapping("Put_A_FilmActor")
 	public @ResponseBody ResponseEntity<FilmActor> updateFilmActor(@RequestBody FilmActor putFilmActor){
-		FilmActor updateFilmActor = filmActorRepository.findById(putFilmActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Category does not exit with the given ID. "));
+		FilmActor updateFilmActor = filmActorRepository.findById(putFilmActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("FilmActor does not exit with the given ID. "));
 		updateFilmActor.setActorId(putFilmActor.getActorId());
 		updateFilmActor.setFilmId(putFilmActor.getFilmId());
 		filmActorRepository.save(updateFilmActor);
@@ -219,7 +219,7 @@ public class MyFirstMicroserviceApplication {
 
 	@DeleteMapping("/Delete_A_FilmActor")
 	public ResponseEntity<FilmActor> deleteFilmActor(@RequestBody FilmActor delFilmActor){
-		FilmActor deleteFilmActor = filmActorRepository.findById(delFilmActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		FilmActor deleteFilmActor = filmActorRepository.findById(delFilmActor.getActorId()).orElseThrow(() -> new ResourceNotFoundException("FilmActor does not exit with given ID"));
 		filmActorRepository.deleteById(deleteFilmActor.getActorId());
 		return ResponseEntity.ok(deleteFilmActor);
 	}
@@ -246,7 +246,7 @@ public class MyFirstMicroserviceApplication {
 
 	@PutMapping("Put_A_FilmCategory")
 	public @ResponseBody ResponseEntity<FilmCategory> updateFilmCategory(@RequestBody FilmCategory putFilmCategory){
-		FilmCategory updateFilmCategory = filmCategoryRepository.findById(putFilmCategory.getFilmId()).orElseThrow(() -> new ResourceNotFoundException("Category does not exit with the given ID. "));
+		FilmCategory updateFilmCategory = filmCategoryRepository.findById(putFilmCategory.getFilmId()).orElseThrow(() -> new ResourceNotFoundException("FilmCategory does not exit with the given ID. "));
 		updateFilmCategory.setCategoryId(putFilmCategory.getCategoryId());
 		updateFilmCategory.setFilmId(putFilmCategory.getFilmId());
 		filmCategoryRepository.save(updateFilmCategory);
@@ -255,13 +255,14 @@ public class MyFirstMicroserviceApplication {
 
 	@DeleteMapping("/Delete_A_FilmCategory")
 	public ResponseEntity<FilmCategory> deleteFilmCategory(@RequestBody FilmCategory delFilmCategory){
-		FilmCategory deleteFilmCategory = filmCategoryRepository.findById(delFilmCategory.getFilmId()).orElseThrow(() -> new ResourceNotFoundException("Actor does not exit with given ID"));
+		FilmCategory deleteFilmCategory = filmCategoryRepository.findById(delFilmCategory.getFilmId()).orElseThrow(() -> new ResourceNotFoundException("FilmCategory does not exit with given ID"));
 		filmCategoryRepository.deleteById(deleteFilmCategory.getFilmId());
 		return ResponseEntity.ok(deleteFilmCategory);
 	}
 
+	//------------------------
 	// Additional Mappings
-
+	//------------------------
 	@GetMapping("Get_Films_By_Keyword")
 	public Iterable<Film> getFilmsByKeyword(@RequestParam String keyword){
 		keyword = "%" + keyword + "%";
