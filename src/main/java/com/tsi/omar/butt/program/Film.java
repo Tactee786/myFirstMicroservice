@@ -14,12 +14,12 @@ public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int filmId;
-    private String title;
-    private String description;
-    private Date releaseYear;
-    private String languageId;
-    private int length;
-    private String rating;
+    String title;
+    String description;
+    Date releaseYear;
+    String languageId;
+    int length;
+    String rating;
 
 
     //Mapping the many-to-many relationship between Film and Category into Film.

@@ -14,7 +14,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
-    private String name;
+    String name;
 
     @ManyToMany (mappedBy = "category", fetch = FetchType.LAZY)
     @JsonIgnore

@@ -11,7 +11,7 @@ public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int languageId;
-    private String name;
+    String name;
 
     //Constructors
     public Language(String name){
