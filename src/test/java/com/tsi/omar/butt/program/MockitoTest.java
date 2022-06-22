@@ -254,4 +254,52 @@ class MockitoTest{
         Language Expected = testCategoryDelete;
         Assertions.assertEquals(Expected,Actual,"Language was not deleted.");
     }
+
+    //----------------------------
+    // FilmActor CRUD operation Tests
+    //----------------------------
+    @Test//get method for all filmActors
+    void getAllFilmActors(){
+        myFirstMicroserviceApplication.getAllFilmActors ();
+        verify(filmActorRepository).findAll();
+    }
+    @Test//get method for a filmActors
+    void getFilmActor(){
+        FilmActor testFilmActor = new FilmActor(1,1);
+        when(filmActorRepository.findById(1)).thenReturn(Optional.of(testFilmActor));
+        FilmActor Actual = myFirstMicroserviceApplication.getFilmActor(testFilmActor.getFilmId()).getBody();
+        FilmActor Expected = testFilmActor;
+        Assertions.assertEquals(Expected,Actual,"Could not find FilmActor with ID: ");
+    }
+    @Test//post method for a filmActors
+    void addFilmActor(){
+        FilmActor testFilmActor = new FilmActor(1,1);
+        FilmActor Actual = myFirstMicroserviceApplication.addFilmActor(testFilmActor).getBody();
+        ArgumentCaptor<FilmActor> actorArgumentCaptor = ArgumentCaptor.forClass(FilmActor.class);
+        verify(filmActorRepository).save(actorArgumentCaptor.capture());
+        FilmActor Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Language was not added.");
+    }
+    @Test//put  method for a Language
+    void updateFilmActor(){
+        FilmActor testFilmActor = new FilmActor(1,1);
+        FilmActor testFilmActorUpdated = new FilmActor(1,1);
+        when(filmActorRepository.findById(testFilmActor.getActorId())).thenReturn(Optional.of(testFilmActorUpdated));
+        FilmActor Actual = myFirstMicroserviceApplication.updateFilmActor(testFilmActorUpdated).getBody();
+        ArgumentCaptor<FilmActor> actorArgumentCaptor = ArgumentCaptor.forClass(FilmActor.class);
+        verify(filmActorRepository).save(actorArgumentCaptor.capture());
+        FilmActor Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Language was not updated.");
+    }
+    @Test//delete method for a Language
+    void deleteFilmActor(){
+        FilmActor testFilmActor = new FilmActor(1,1);
+        FilmActor testFilmActorDelete = new FilmActor(1,1);
+        when(filmActorRepository.findById(testFilmActorDelete.getActorId())).thenReturn(Optional.of(testFilmActorDelete));
+        doNothing().when(filmActorRepository).deleteById(1);
+        FilmActor Actual = myFirstMicroserviceApplication.deleteFilmActor(testFilmActorDelete).getBody();
+        filmActorRepository.deleteById(testFilmActorDelete.getActorId());
+        FilmActor Expected = testFilmActorDelete;
+        Assertions.assertEquals(Expected,Actual,"Language was not deleted.");
+    }
 }
