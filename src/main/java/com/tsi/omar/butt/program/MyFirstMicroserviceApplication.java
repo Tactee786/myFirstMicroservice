@@ -232,8 +232,8 @@ public class MyFirstMicroserviceApplication {
 
 	@GetMapping("Get_A_FilmCategory")
 	public ResponseEntity<FilmCategory> getFilmCategory(@RequestParam int id){
-		FilmCategory FilmCategory = filmCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("FilmCategory does not exist with ID: " +id));
-		return ResponseEntity.ok(FilmCategory);
+		FilmCategory filmCategory = filmCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("FilmCategory does not exist with ID: " +id));
+		return ResponseEntity.ok(filmCategory);
 	}
 
 	@PostMapping("Post_A_FilmCategory")
