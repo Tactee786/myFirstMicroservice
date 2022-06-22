@@ -3,7 +3,7 @@ package com.tsi.omar.butt.program;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CategoryTest {
+class CategoryTest {
 
     @Test
     void testGetCategoryId(){

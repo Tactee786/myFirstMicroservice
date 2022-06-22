@@ -3,7 +3,7 @@ package com.tsi.omar.butt.program;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LanguageTest {
+class LanguageTest {
     @Test
     void testGetLanguageId(){
         Language testLanguage = new Language("testLanguage");

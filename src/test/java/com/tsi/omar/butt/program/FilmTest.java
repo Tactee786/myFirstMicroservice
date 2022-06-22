@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-public class FilmTest {
+class FilmTest {
 
     @Test
     void testGetFilmId(){
