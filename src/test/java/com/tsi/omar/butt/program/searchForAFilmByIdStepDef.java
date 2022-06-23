@@ -5,14 +5,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
+import java.util.Date;
 import java.util.Optional;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-public class deleteActorStepDef {
+public class searchForAFilmByIdStepDef {
+
     private MyFirstMicroserviceApplication myFirstMicroserviceApplication;
     @Mock
     private ActorRepository actorRepository;
@@ -36,26 +38,29 @@ public class deleteActorStepDef {
         languageRepository =mock(LanguageRepository.class);
         myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, categoryRepository, filmActorRepository, filmCategoryRepository, filmRepository, languageRepository);
     }
+
     int id;
-    Actor testActor;
-    Actor updatedActor;
-    Actor Expected;
-    Actor Actual;
-    @Given("I have the actor id number")
-    public void i_have_the_actor_id_number() {
+    Film testFilm;
+    Film Expected;
+    Film Actual;
+    Date testDate = new Date();
+
+
+    @Given("I have the id of the film i want to watch")
+    public void i_have_the_id_of_the_film_i_want_to_watch() {
         id = 1;
-        testActor = new Actor("testFName", "testLName");
-        testActor.setActorId(id);
+        testFilm = new Film("testTitle", "testDescription", testDate , "1",  69, "18");
+        testFilm.setFilmId(id);
     }
-    @When("I input the data into the database for deleting")
-    public void i_input_the_data_into_the_database_for_deleting() {
+    @When("I input the id into the search bar")
+    public void i_input_the_id_into_the_search_bar() {
         setup();
-        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
-        Actual = myFirstMicroserviceApplication.deleteActor(testActor).getBody();
+        when(filmRepository.findById(id)).thenReturn(Optional.of(testFilm));
+        Actual = myFirstMicroserviceApplication.getAFilm(testFilm.getFilmId()).getBody();
     }
-    @Then("I get the success return string for delete")
-    public void i_get_the_success_return_string_for_delete() {
-        Expected = testActor;
+    @Then("I get the relevant information for the film i want to watch")
+    public void i_get_the_relevant_information_for_the_film_i_want_to_watch() {
+        Expected = testFilm;
         Assertions.assertEquals(Expected,Actual,"Actor not added into the database");
     }
 }

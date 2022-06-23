@@ -27,6 +27,11 @@ public class lookUpActorStepDef {
     @BeforeEach
     void setup(){
         actorRepository =mock(ActorRepository.class);
+        categoryRepository =mock(CategoryRepository.class);
+        filmActorRepository =mock(FilmActorRepository.class);
+        filmCategoryRepository =mock(FilmCategoryRepository.class);
+        filmRepository =mock(FilmRepository.class);
+        languageRepository =mock(LanguageRepository.class);
         myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, categoryRepository, filmActorRepository, filmCategoryRepository, filmRepository, languageRepository);
     }
     int id;
