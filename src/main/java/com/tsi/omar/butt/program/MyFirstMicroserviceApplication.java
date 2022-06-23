@@ -7,6 +7,9 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 @RestController
 @RequestMapping("/Home")
@@ -38,6 +41,12 @@ public class MyFirstMicroserviceApplication {
 		this.filmRepository =filmRepository;
 		this.languageRepository =languageRepository;
 	}
+
+//	 					Mappings (CRUD)
+// 	@GetMapping - mapping HTTP 'GET' requests (READ)
+//	@PostMapping - mapping HTTP 'POST' requests (CREATE)
+//	@PutMapping - mapping HTTP 'Put' requests (UPDATE)
+//	@DeleteMapping - mapping HTTP 'Delete' requests (DELETE)
 
 	//------------------------
 	// Actor CRUD operations
@@ -266,17 +275,15 @@ public class MyFirstMicroserviceApplication {
 		keyword = "%" + keyword + "%";
 		return filmRepository.findByTitleLike(keyword);
 	}
-
-
 	@GetMapping("Get_Film_By_Category")
 	public Iterable<Film> getFilmByCategory(@RequestParam String name){
-
-//		Category catIdObj = categoryRepository.findByName(name);
-//		int catIdInt = catIdObj.getCategoryId();
-//		FilmCategory filmsFrom = FilmCategoryRepository.findByCategoryId(catIdInt);
-//		Iterable<FilmCategory> filmCatIdObj = filmCategoryRepository.findByCategoryId(catIdInt);
-//		int test123 = filmCatIdObj.
-		return null;
+		Category catIdObj = categoryRepository.findByName(name);
+		int catIdInt = catIdObj.getCategoryId();
+		List<FilmCategory> filmCatIdObj = filmCategoryRepository.findByCategoryId(catIdInt);
+		List<Integer> filmList = new ArrayList<>();;
+		filmCatIdObj.forEach(film -> filmList.add(film.getFilmId()));
+		Iterable<Film> filmsListFound = filmRepository.findAllById(filmList);
+		return filmsListFound;
 	}
 
 }
