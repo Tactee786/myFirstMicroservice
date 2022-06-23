@@ -44,4 +44,25 @@ public class seleniumTest {
         Assertions.assertTrue(element.getText().contains("ID : 3"), "not ID : 3");
         Assertions.assertTrue(element.isDisplayed());
     }
+    @Test
+    @Order(3)
+    void goToActionCategory(){
+        driver.get("http://localhost:3000/Film/Categories");
+        WebElement actionLink = (new WebDriverWait(driver, Duration.ofSeconds(120))).until(ExpectedConditions.visibilityOfElementLocated(By.id("name")));
+        actionLink.click();
+        WebElement element = (new WebDriverWait(driver, Duration.ofSeconds(120))).until(ExpectedConditions.visibilityOfElementLocated(By.className("AFBCcategory")));
+        Assertions.assertTrue(element.isDisplayed());
+    }
+    @Test
+    @Order(4)
+    void searchFilmByName(){
+        driver.get("http://localhost:3000/Film");
+        WebElement addId = driver.findElement(By.className("SFAAIField"));
+        addId.sendKeys("Alice");
+        WebElement submitButton = driver.findElement(By.className("SFAAISubmit"));
+        submitButton.click();
+        WebElement element = (new WebDriverWait(driver, Duration.ofSeconds(120))).until(ExpectedConditions.visibilityOfElementLocated(By.id("title")));
+        Assertions.assertTrue(element.getText().contains("ALICE FANTASIA"), "not ALICE FANTASIA");
+        Assertions.assertTrue(element.isDisplayed());
+    }
 }
