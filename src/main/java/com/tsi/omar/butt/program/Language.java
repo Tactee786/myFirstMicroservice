@@ -1,6 +1,5 @@
 package com.tsi.omar.butt.program;
 
-//import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 
 @Entity
